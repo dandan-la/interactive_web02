@@ -1,0 +1,183 @@
+$lh: 1.55em;
+$a_lh: calc(1rem * 1.55);
+$marg: calc(1.5rem / 2);
+$logo_height: calc((100vw - #{$marg} * 4) * 0.1573);
+$animation_duration: 7s;
+
+@font-face{
+    font-family: 'KoddiUD OnGothic';
+    src: url('/font/KoddiUDOnGothic-Regular.woff2') format(woff2),
+         url('/font/KoddiUDOnGothic-Regular.woff') format(woff);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+    text-decoration: none;
+
+    position: relative;
+    box-sizing: border-box;
+
+    font-family: 'KoddiUD OnGothic', 'Noto Sans KR', 'Noto Sans CJK KR', 'Pretendard', 'Helvertica Neue', Helvetica, sans-serif ;
+}
+
+html{
+    font-size: 16px;
+}
+
+:root{
+   --background: #000;
+   --color: #fff;
+}
+
+body{
+    background: var(--background);
+    color: var(--color);
+    line-height: $lh;
+}
+
+a, a:link, a:visited{
+    text-decoration: none;
+    color: inherit;
+}
+
+.background{
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
+.ruler{
+    @extend .background;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 calc(#{$marg} * 2);
+
+    span{
+        width: 3px;
+        height: 1rem;
+        background: var(--color);
+    }
+
+    &.ruler-top{
+        top: 0;
+    }
+
+    &.ruler-bottom{
+        top: unset;
+        bottom: 0;
+    }
+}
+
+.logo{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: calc(#{$marg} * 2);
+
+    >div{
+        height: $logo_height;
+        width: 100%;
+        animation: logoScaler;
+        animation-duration: $animation_duration;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: cubic-bezier(0.66, -0.01, 0.43, 1.01);
+
+
+        svg{
+            width: 100%;
+            height: 100%;
+            path{
+                fill: var(--color);
+            }
+        }
+
+        &.group-1{animation-name: logoScaler_largest;}
+        &.group-2{animation-name: logoScaler_larger; animation-delay: calc(#{$animation_duration} / 5);}
+        &.group-3{animation-delay: calc(#{$animation_duration} / 5 * 2);}
+        &.group-4{animation-delay: calc(#{$animation_duration} / 5 * 3);}
+        &.group-5{animation-delay: calc(#{$animation_duration} / 5 * 4);}
+        &.group-6{animation-delay: calc(#{$animation_duration} / 5 * 5);}
+
+    }
+}
+
+
+.link-tree{
+    font-size: calc(1rem + 0.3vw);
+    height: 100%;
+    line-height: $lh;
+    counter-reset: linkTree;
+    li{
+        display: flex;
+        align-items: center;
+        position: fixed;
+
+        &::before{
+            counter-increment: linkTree;
+            content: counter(linkTree);
+            border: 3px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1.2em;
+            height: 1.2em;
+            border-radius: 100px;
+            margin-right: 0.5rem;
+        }
+
+        a{
+            border: 3px solid transparent;
+            &:hover{
+                border-bottom: 3px solid;
+            }
+        }
+
+
+    }
+}
+
+.drawing{
+    width: 100%;
+    mix-blend-mode: difference;    
+    bottom: calc(#{$marg} * 2);
+    
+    svg{
+        width: 100%;
+        height: 100%;
+
+        path{
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            animation: dash 3s ease-in-out forwards;
+        }        
+    }
+}
+
+@keyframes dash{
+    from{
+        stroke-dashoffset: 1;
+    }
+    to{
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes logoScaler{
+    0%{height: $logo_height;}
+    100%{height: 52%;}
+}
+@keyframes logoScaler_larger{
+    0%{height: $logo_height;}
+    100%{height: 73.33%;}
+}
+@keyframes logoScaler_largest{
+    100%{height: 100%;}
+}

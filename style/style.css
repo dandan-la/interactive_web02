@@ -1,0 +1,177 @@
+@font-face {
+  font-family: "KoddiUD OnGothic";
+  src: url("/font/KoddiUDOnGothic-Regular.woff2") format(woff2), url("/font/KoddiUDOnGothic-Regular.woff") format(woff);
+}
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  position: relative;
+  box-sizing: border-box;
+  font-family: "KoddiUD OnGothic", "Noto Sans KR", "Noto Sans CJK KR", "Pretendard", "Helvertica Neue", Helvetica, sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+:root {
+  --background: #000;
+  --color: #fff;
+}
+
+body {
+  background: var(--background);
+  color: var(--color);
+  line-height: 1.55em;
+}
+
+a, a:link, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.background, .ruler {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+.ruler {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 calc(0.75rem * 2);
+}
+.ruler span {
+  width: 3px;
+  height: 1rem;
+  background: var(--color);
+}
+.ruler.ruler-top {
+  top: 0;
+}
+.ruler.ruler-bottom {
+  top: unset;
+  bottom: 0;
+}
+
+.logo {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: calc(0.75rem * 2);
+}
+.logo > div {
+  height: calc((100vw - 0.75rem * 4) * 0.1573);
+  width: 100%;
+  animation: logoScaler;
+  animation-duration: 7s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.66, -0.01, 0.43, 1.01);
+}
+.logo > div svg {
+  width: 100%;
+  height: 100%;
+}
+.logo > div svg path {
+  fill: var(--color);
+}
+.logo > div.group-1 {
+  animation-name: logoScaler_largest;
+}
+.logo > div.group-2 {
+  animation-name: logoScaler_larger;
+  animation-delay: calc(7s / 5);
+}
+.logo > div.group-3 {
+  animation-delay: calc(7s / 5 * 2);
+}
+.logo > div.group-4 {
+  animation-delay: calc(7s / 5 * 3);
+}
+.logo > div.group-5 {
+  animation-delay: calc(7s / 5 * 4);
+}
+.logo > div.group-6 {
+  animation-delay: calc(7s / 5 * 5);
+}
+
+.link-tree {
+  font-size: calc(1rem + 0.3vw);
+  height: 100%;
+  line-height: 1.55em;
+  counter-reset: linkTree;
+}
+.link-tree li {
+  display: flex;
+  align-items: center;
+  position: fixed;
+}
+.link-tree li::before {
+  counter-increment: linkTree;
+  content: counter(linkTree);
+  border: 3px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 100px;
+  margin-right: 0.5rem;
+}
+.link-tree li a {
+  border: 3px solid transparent;
+}
+.link-tree li a:hover {
+  border-bottom: 3px solid;
+}
+
+.drawing {
+  width: 100%;
+  mix-blend-mode: difference;
+  bottom: calc(0.75rem * 2);
+}
+.drawing svg {
+  width: 100%;
+  height: 100%;
+}
+.drawing svg path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: dash 3s ease-in-out forwards;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes logoScaler {
+  0% {
+    height: calc((100vw - 0.75rem * 4) * 0.1573);
+  }
+  100% {
+    height: 52%;
+  }
+}
+@keyframes logoScaler_larger {
+  0% {
+    height: calc((100vw - 0.75rem * 4) * 0.1573);
+  }
+  100% {
+    height: 73.33%;
+  }
+}
+@keyframes logoScaler_largest {
+  100% {
+    height: 100%;
+  }
+}/*# sourceMappingURL=style.css.map */
